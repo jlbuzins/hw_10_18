@@ -1,0 +1,9 @@
+The ocean plays a huge role in the global climate system. The first few meters of the ocean has the same heat
+capacity as the entire atmosphere. Much of this heat capacity is driven by mixing that occurs underneath the
+ocean's surface, a phenomena known as internal waves, or the mixing of less-dense fresh water with more-dense
+salt water. Obtaining oceanic data is difficult and expensive, so researchers are often limited to numerical
+simulation or lab-sized physical experiments, like the stratified inclined duct. These experiments can capture
+a great deal of "irrelevant" data (where no mixing occurs), leading to high storage costs. To prioritize data,
+there is a need for a model that can accurately label and predict the regime of an experiment, indicating in
+real-time if turbulence is about to begin. The model, a convolutional neural net trained on a set of frames,
+has a 90% accuracy. Here is a change.
