@@ -29,32 +29,44 @@ if nargin<4
 else
     tolc=varargin{1};
 end
+
 if nargin<5
     tolr=max(Sr)*.01;
     else
     tolr=varargin{2};
 end
+
 if nargin<6 
     tolkp=max(KPSVs)*.01;
-    else
+else
     tolkp=varargin{3};
 end
+
 kc=find(Sc<tolc,1);
 kr=find(Sr<tolr,1);
 kp=find(sort(KPSVs(:),'descend')<tolkp,1);
+
 if isempty(kc), kr=length(Sc);end
 if isempty(kr), kr=length(Sr);end
 if isempty(kp), kr=length(KPSVs(:));end
+
 [indSc]=find(Sc>=tolc);
 [indSr]=find(Sr>=tolr);
 [indKP]=find(KPSVs>=tolkp);
+
 CoeffB=Uc'*B*Ur;
+
+% Truncating singluar values
 Sctrunc=zeros(size(Sc));
 Srtrunc=zeros(size(Sr));
 Sctrunc(Sc>tolc)=Sc(Sc>tolc);
 Srtrunc(Sr>tolr)=Sr(Sr>tolr);
+
+% Taking the Kronecker product of the truncated singular values
 Kptrunc=Sctrunc*Srtrunc';
 Kptrunc(Kptrunc>0)=1./Kptrunc(Kptrunc>0);
+
+% Computing X and XKP
 X=Vc*(CoeffB.*Kptrunc)*Vr';
 KPSVpinv=zeros(size(KPSVs));
 KPSVpinv(indKP)=1./KPSVs(indKP);
